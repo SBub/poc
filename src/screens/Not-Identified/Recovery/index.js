@@ -9,7 +9,10 @@ const Recovery = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header>Recovery</Header>
-      <Btn title="Recover Identity" onPress={() => {}} />
+      <Btn
+        title="Recover Identity"
+        onPress={() => navigation.navigate("StatusUpdate")}
+      />
       <Btn type="secondary" title="Back" onPress={navigation.goBack} />
     </View>
   );
