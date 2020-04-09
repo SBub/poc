@@ -1,21 +1,21 @@
 import React from "react";
 import { View } from "react-native";
+
 import styles from "utils/styles";
 
 import Header from "components/Header";
 import Btn from "components/Btn";
 
-const Recovery = ({ navigation }) => {
+const Biometrics = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Header>Recovery</Header>
+      <Header>Biometrics detected</Header>
       <Btn
-        title="Recover Identity"
-        onPress={() => navigation.navigate("StatusUpdate")}
+        title="Preview seed phase"
+        onPress={() => navigation.navigate("SeedPhrasePreview")}
       />
-      <Btn type="secondary" title="Back" onPress={navigation.goBack} />
     </View>
   );
 };
 
-export default Recovery;
+export default Biometrics;

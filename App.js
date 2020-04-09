@@ -1,15 +1,12 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 
 import ErrorBoundary from "src/ErrorBoundary";
-import NotIdentifiedStack from "src/screens/Not-Identified";
+import RootNavigation from "./src/screens";
 
 const App = () => {
   return (
     <ErrorBoundary>
-      <NavigationContainer>
-        <NotIdentifiedStack />
-      </NavigationContainer>
+      <RootNavigation />
     </ErrorBoundary>
   );
 };

@@ -1,21 +1,21 @@
 import React from "react";
 import { View } from "react-native";
+
 import styles from "utils/styles";
 
 import Header from "components/Header";
 import Btn from "components/Btn";
 
-const Recovery = ({ navigation }) => {
+const SeedPhrasePreview = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Header>Recovery</Header>
+      <Header>Seed Phrase Preview</Header>
       <Btn
-        title="Recover Identity"
-        onPress={() => navigation.navigate("StatusUpdate")}
+        title="Done"
+        onPress={() => navigation.navigate("RepeatSeedPhrase")}
       />
-      <Btn type="secondary" title="Back" onPress={navigation.goBack} />
     </View>
   );
 };
 
-export default Recovery;
+export default SeedPhrasePreview;
