@@ -6,6 +6,7 @@ import NotIdentifiedStack from "./Not-Identified";
 import AuthenticationStack from "./Authentication";
 import IdentifiedTabs from "./Identified";
 import StatusUpdate from "./Modals/StatusUpdate";
+import InteractionServices from "./Modals/InteractionServices";
 
 import { useStatus } from "modules/status/context";
 
@@ -61,6 +62,10 @@ const RootNavigation = () => {
         />
         <RootStack.Screen name="Identified" component={IdentifiedTabs} />
         <RootStack.Screen name="StatusUpdate" component={StatusUpdate} />
+        <RootStack.Screen
+          name="InteractionServices"
+          component={InteractionServices}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );
