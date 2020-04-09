@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -7,11 +7,30 @@ import AuthenticationStack from "./Authentication";
 import IdentifiedTabs from "./Identified";
 import StatusUpdate from "./Modals/StatusUpdate";
 
+import { useStatus } from "modules/status/context";
+
 const RootStack = createStackNavigator();
 
+const useStatusListener = () => {
+  const ref = useRef(null);
+  const status = useStatus();
+
+  useEffect(() => {
+    if (ref.current) {
+      if (status) {
+        ref.current.navigate("StatusUpdate");
+      }
+    }
+  }, [status]);
+
+  return ref;
+};
+
 const RootNavigation = () => {
+  const ref = useStatusListener();
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={ref}>
       <RootStack.Navigator
         headerMode="none"
         mode="modal"
