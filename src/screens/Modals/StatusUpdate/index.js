@@ -3,18 +3,14 @@ import { View } from "react-native";
 
 import styles from "utils/styles";
 import Paragraph from "components/Paragraph";
+import { useStatus } from "modules/status/context";
 
-const StatusUpdate = ({ navigation }) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate("Authentication");
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+const StatusUpdate = () => {
+  const status = useStatus();
 
   return (
     <View style={styles.container}>
-      <Paragraph color="white">Verification on server...</Paragraph>
+      <Paragraph color="white">{status}...</Paragraph>
     </View>
   );
 };
