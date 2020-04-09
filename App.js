@@ -3,7 +3,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import ErrorBoundary from "src/ErrorBoundary";
+
 import NotIdentifiedStack from "src/screens/Not-Identified";
+import AuthenticationStack from "src/screens/Authentication";
 import StatusUpdate from "src/screens/Modals/StatusUpdate";
 
 const RootStack = createStackNavigator();
@@ -38,6 +40,10 @@ const App = () => {
           <RootStack.Screen
             name="NotIdentified"
             component={NotIdentifiedStack}
+          />
+          <RootStack.Screen
+            name="Authentication"
+            component={AuthenticationStack}
           />
           <RootStack.Screen name="StatusUpdate" component={StatusUpdate} />
         </RootStack.Navigator>
