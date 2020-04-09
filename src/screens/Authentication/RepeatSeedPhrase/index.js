@@ -12,7 +12,7 @@ const RepeatSeedPhrase = ({ navigation }) => {
       <Header>Repeat Seed Phrase</Header>
       <Btn
         title="Its correct now"
-        onPress={() => navigation.navigate("RepeatSeedPhrase")}
+        onPress={() => navigation.navigate("Identified")}
       />
     </View>
   );
