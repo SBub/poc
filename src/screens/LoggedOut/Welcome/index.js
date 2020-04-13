@@ -5,10 +5,10 @@ import styles from "utils/styles";
 import Btn from "components/Btn";
 import Header from "components/Header";
 
-const Onboarding = ({ navigation }) => {
+const Welcome = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Header>Onboarding</Header>
+      <Header>Welcome</Header>
       <Btn onPress={() => navigation.navigate("Entropy")} title="Get started" />
       <Btn
         onPress={() => navigation.navigate("Recovery")}
@@ -19,4 +19,4 @@ const Onboarding = ({ navigation }) => {
   );
 };
 
-export default Onboarding;
+export default Welcome;

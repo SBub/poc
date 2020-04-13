@@ -2,11 +2,10 @@ import React, { useRef, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import NotIdentifiedStack from "./Not-Identified";
-import AuthenticationStack from "./Authentication";
-import IdentifiedTabs from "./Identified";
+import LoggedOut from "./LoggedOut";
+import LoggedIn from "./LoggedIn";
+import Onboarding from "./Onboarding";
 import StatusUpdate from "./Modals/StatusUpdate";
-import InteractionServices from "./Modals/InteractionServices";
 
 import { useStatus } from "modules/status/context";
 import useAuth from "modules/auth/useAuth";
@@ -40,17 +39,11 @@ const RootNavigation = () => {
       <RootStack.Navigator headerMode="none" mode="modal">
         {did ? (
           <>
-            <RootStack.Screen name="Identified" component={IdentifiedTabs} />
-            <RootStack.Screen
-              name="Authentication"
-              component={AuthenticationStack}
-            />
+            <RootStack.Screen name="LoggedIn" component={LoggedIn} />
+            <RootStack.Screen name="Onboarding" component={Onboarding} />
           </>
         ) : (
-          <RootStack.Screen
-            name="NotIdentified"
-            component={NotIdentifiedStack}
-          />
+          <RootStack.Screen name="LoggedOut" component={LoggedOut} />
         )}
         <RootStack.Screen
           name="StatusUpdate"
