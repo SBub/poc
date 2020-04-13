@@ -9,6 +9,7 @@ import StatusUpdate from "./Modals/StatusUpdate";
 import InteractionServices from "./Modals/InteractionServices";
 
 import { useStatus } from "modules/status/context";
+import useAuth from "modules/auth/useAuth";
 
 const RootStack = createStackNavigator();
 
@@ -30,41 +31,49 @@ const useStatusListener = () => {
 const RootNavigation = () => {
   const ref = useStatusListener();
 
+  const { authAttempted, did } = useAuth();
+
+  if (!authAttempted) return null;
+
   return (
     <NavigationContainer ref={ref}>
-      <RootStack.Navigator
-        headerMode="none"
-        mode="modal"
-        screenOptions={{
-          cardStyle: { backgroundColor: "transparent" },
-          cardOverlayEnabled: true,
-          cardStyleInterpolator: ({ current: { progress } }) => ({
-            cardStyle: {
-              opacity: progress.interpolate({
-                inputRange: [0, 0.5, 0.9, 1],
-                outputRange: [0, 0.25, 0.7, 1],
-              }),
-            },
-            overlayStyle: {
-              opacity: progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0, 0.95],
-                extrapolate: "clamp",
-              }),
-            },
-          }),
-        }}
-      >
-        <RootStack.Screen name="NotIdentified" component={NotIdentifiedStack} />
+      <RootStack.Navigator headerMode="none" mode="modal">
+        {did ? (
+          <>
+            <RootStack.Screen name="Identified" component={IdentifiedTabs} />
+            <RootStack.Screen
+              name="Authentication"
+              component={AuthenticationStack}
+            />
+          </>
+        ) : (
+          <RootStack.Screen
+            name="NotIdentified"
+            component={NotIdentifiedStack}
+          />
+        )}
         <RootStack.Screen
-          name="Authentication"
-          component={AuthenticationStack}
-        />
-        <RootStack.Screen name="Identified" component={IdentifiedTabs} />
-        <RootStack.Screen name="StatusUpdate" component={StatusUpdate} />
-        <RootStack.Screen
-          name="InteractionServices"
-          component={InteractionServices}
+          name="StatusUpdate"
+          component={StatusUpdate}
+          options={{
+            cardStyle: { backgroundColor: "transparent" },
+            cardOverlayEnabled: true,
+            cardStyleInterpolator: ({ current: { progress } }) => ({
+              cardStyle: {
+                opacity: progress.interpolate({
+                  inputRange: [0, 0.5, 0.9, 1],
+                  outputRange: [0, 0.25, 0.7, 1],
+                }),
+              },
+              overlayStyle: {
+                opacity: progress.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 0.75],
+                  extrapolate: "clamp",
+                }),
+              },
+            }),
+          }}
         />
       </RootStack.Navigator>
     </NavigationContainer>

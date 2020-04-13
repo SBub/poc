@@ -10,7 +10,7 @@ const StatusUpdate = () => {
 
   return (
     <View style={styles.container}>
-      <Paragraph color="white">{status}...</Paragraph>
+      <Paragraph color="white">{status}</Paragraph>
     </View>
   );
 };

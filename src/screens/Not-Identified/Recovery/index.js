@@ -1,24 +1,37 @@
 import React from "react";
-import { View } from "react-native";
+import { View, AsyncStorage } from "react-native";
 import styles from "utils/styles";
 
 import Header from "components/Header";
 import Btn from "components/Btn";
 
 import { useStatusDispatch } from "modules/status/context";
+import { useAuthDispatch } from "modules/auth/context";
+
+import API from "utils/api";
 
 const Recovery = ({ navigation }) => {
-  const dispatch = useStatusDispatch();
+  const dispatchToStatus = useStatusDispatch();
+  const dispatchToAuth = useAuthDispatch();
 
-  const recoverIdentity = () => {
+  const recoverIdentity = async () => {
+    dispatchToStatus({ type: "UPDATE", payload: "Verification on server" });
+
     try {
-      dispatch({ type: "UPDATE", payload: "Verification on server" });
+      const did = await API.recoverIdentity();
+
+      await AsyncStorage.setItem("did", did);
+
+      dispatchToAuth({ type: "AUTH_CHANGE", payload: did });
+      navigation.navigate("Authentication");
+
+      dispatchToStatus({ type: "RESET" });
     } catch (err) {
-      dispatch({ type: "UPDATE", payload: "Verification failed" });
-    } finally {
+      dispatchToStatus({ type: "UPDATE", payload: err });
       setTimeout(() => {
-        dispatch({ type: "RESET" });
-        navigation.navigate("Authentication");
+        navigation.navigate("NotIdentified");
+
+        dispatchToStatus({ type: "RESET" });
       }, 3000);
     }
   };
