@@ -23,13 +23,13 @@ const Recovery = ({ navigation }) => {
       await AsyncStorage.setItem("did", did);
 
       dispatchToAuth({ type: "AUTH_CHANGE", payload: did });
-      navigation.navigate("Authentication");
+      navigation.navigate("Onboarding");
 
       dispatchToStatus({ type: "RESET" });
     } catch (err) {
       dispatchToStatus({ type: "UPDATE", payload: err });
       setTimeout(() => {
-        navigation.navigate("NotIdentified");
+        navigation.navigate("LoggedOut");
 
         dispatchToStatus({ type: "RESET" });
       }, 3000);

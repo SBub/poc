@@ -8,7 +8,7 @@ import RepeatSeedPhrase from "./RepeatSeedPhrase";
 
 const Stack = createStackNavigator();
 
-const AuthenticationStack = () => {
+const OnboardingStack = () => {
   return (
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="PasscodeCreation" component={PasscodeCreation} />
@@ -19,4 +19,4 @@ const AuthenticationStack = () => {
   );
 };
 
-export default AuthenticationStack;
+export default OnboardingStack;

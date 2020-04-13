@@ -8,6 +8,8 @@ const useAuth = () => {
   const dispatch = useAuthDispatch();
 
   useEffect(() => {
+    // AsyncStorage.removeItem("did");
+
     const getDid = async () => {
       try {
         const did = await AsyncStorage.getItem("did");
