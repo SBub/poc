@@ -10,6 +10,8 @@ import StatusUpdate from "./Modals/StatusUpdate";
 import { useStatus } from "modules/status/context";
 import useAuth from "modules/auth/useAuth";
 
+import { modalScreenOptions } from "utils/styles";
+
 const RootStack = createStackNavigator();
 
 const useStatusListener = () => {
@@ -36,7 +38,11 @@ const RootNavigation = () => {
 
   return (
     <NavigationContainer ref={ref}>
-      <RootStack.Navigator headerMode="none" mode="modal">
+      <RootStack.Navigator
+        headerMode="none"
+        mode="modal"
+        screenOptions={modalScreenOptions}
+      >
         {did ? (
           <>
             <RootStack.Screen name="LoggedIn" component={LoggedIn} />
@@ -45,29 +51,7 @@ const RootNavigation = () => {
         ) : (
           <RootStack.Screen name="LoggedOut" component={LoggedOut} />
         )}
-        <RootStack.Screen
-          name="StatusUpdate"
-          component={StatusUpdate}
-          options={{
-            cardStyle: { backgroundColor: "transparent" },
-            cardOverlayEnabled: true,
-            cardStyleInterpolator: ({ current: { progress } }) => ({
-              cardStyle: {
-                opacity: progress.interpolate({
-                  inputRange: [0, 0.5, 0.9, 1],
-                  outputRange: [0, 0.25, 0.7, 1],
-                }),
-              },
-              overlayStyle: {
-                opacity: progress.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 0.75],
-                  extrapolate: "clamp",
-                }),
-              },
-            }),
-          }}
-        />
+        <RootStack.Screen name="StatusUpdate" component={StatusUpdate} />
       </RootStack.Navigator>
     </NavigationContainer>
   );
