@@ -1,13 +1,24 @@
 import React from "react";
-import { View } from "react-native";
+import { View, AsyncStorage } from "react-native";
 import styles from "utils/styles";
 
-import Header from "components/Header";
+import { useAuthDispatch } from "modules/auth/context";
 
-const Settings = () => {
+import Header from "components/Header";
+import Btn from "components/Btn";
+
+const Settings = ({ navigation }) => {
+  const dispatchToAuth = useAuthDispatch();
+  const removeStoredDid = async () => {
+    await AsyncStorage.removeItem("did");
+
+    dispatchToAuth({ type: "AUTH_CHANGE", payload: null });
+    navigation.navigate("LoggedOut");
+  };
   return (
     <View style={styles.container}>
       <Header>Settings</Header>
+      <Btn title="Log out" onPress={removeStoredDid} />
     </View>
   );
 };
