@@ -18,7 +18,7 @@ const Settings = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header>Settings</Header>
-      <Btn title="Remove did from storage" onPress={removeStoredDid} />
+      <Btn title="Log out" onPress={removeStoredDid} />
     </View>
   );
 };
